@@ -1,354 +1,427 @@
 
+/* ==================================================
+   1. CSS CUSTOM PROPERTIES
+   Variables make colors and common values reusable.
+   ================================================== */
 
+:root {
+    --primary-color: #17365d;
+    --secondary-color: #287da8;
+    --accent-color: #e89b30;
+    --text-color: #263238;
+    --white-color: #ffffff;
+    --light-background: #f2f6fa;
+    --border-color: #d5dee8;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ==================================================
+   2. UNIVERSAL SELECTOR AND BODY DEFAULTS
+   ================================================== */
+
+/* Universal selector: applies border-box sizing to all elements. */
 * {
     box-sizing: border-box;
 }
 
+/*
+   Element selector: styles the whole page.
+
+   INHERITANCE:
+   Child elements inherit properties such as color and font-family
+   from body unless their own CSS rules specify different values.
+*/
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    line-height: 1.7;
-    background-color: #f2f5f9;
-    color: #263238;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-background);
 }
 
 
-h1, h2, h3 {
-    line-height: 1.3;
-    color: #17365d;
-}
+/* ==================================================
+   3. PROFILE HEADER
+   ================================================== */
 
-h2 {
-    margin-top: 0;
-    font-size: 1.8rem;
-}
-
-h3 {
-    font-size: 1.2rem;
-}
-
-p {
-    margin-bottom: 1rem;
-}
-
-hr {
-    border: 0;
-    border-top: 1px solid #cccccc;
-}
-
-
+/* ID selector: targets the element with id="profile-header". */
 #profile-header {
-    min-height: 55vh;
-    padding: 2rem 5%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white-color);
     text-align: center;
-    color: #ffffff;
-    background-color: #17365d;
-    background-image: linear-gradient(
-        135deg,
-        #17365d,
-        #287da8,
-        #54a6a0
-    );
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    padding: 3rem 1rem;
+    min-height: 25vh;
+    border-bottom: 5px solid var(--accent-color);
+}
+
+#profile-header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+#profile-header p {
+    margin: 0.5rem 0 0;
+    font-size: 1.1rem;
 }
 
 
+/* ==================================================
+   4. NAVIGATION AND LINK STATES
+   ================================================== */
 
+.navigation {
+    background-color: var(--primary-color);
+    padding: 0.75rem 1rem;
+}
+
+/* Child combinator: selects only the ul directly inside nav. */
+.navigation > ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* Descendant combinator: selects links anywhere inside navigation. */
 .navigation a {
     display: inline-block;
-    margin: 0 0.5rem;
-    padding: 0.4rem 0.8rem;
-    color: #ffffff;
+    color: var(--white-color);
     text-decoration: none;
-    border-radius: 6px;
+    padding: 0.4rem 0.7rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
-
-
+/* Link pseudo-class states. */
 a:link {
-    color: #075ca8;
+    color: var(--secondary-color);
 }
 
 a:visited {
     color: #7040a0;
 }
 
+/*
+   SPECIFICITY:
+   a:link has specificity (0,1,1).
+   .navigation a:link has specificity (0,2,1).
+
+   The navigation selector is more specific, so its white link color
+   overrides the general a:link color inside the navigation.
+*/
+.navigation a:link {
+    color: var(--white-color);
+}
+
+.navigation a:visited {
+    color: #e5ddff;
+}
+
+/* Hover and keyboard-focus states improve usability. */
+.navigation a:hover,
+.navigation a:focus-visible {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    outline: 2px solid var(--white-color);
+    outline-offset: 2px;
+}
+
 a:hover {
-    color: #d35400;
     text-decoration: underline;
-    cursor: pointer;
 }
 
 a:active {
-    color: #b22222;
+    color: var(--accent-color);
 }
 
 
+/* ==================================================
+   5. MAIN CONTENT AND SECTIONS
+   ================================================== */
 
-.navigation a:link,
-.navigation a:visited {
-    color: #ffffff;
-}
-
-.navigation a:hover {
-    color: #fff3b0;
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-.navigation a:active {
-    color: #ffffff;
-}
-
-
-
-.profile-image {
-    display: block;
-    width: 160px;
-    height: 160px;
-    max-width: 100%;
-    margin: 1.5rem auto;
-    border: 4px solid #ffffff;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-}
-
-
-#profile-header > h1 {
-    margin-bottom: 0.3rem;
-    color: #ffffff;
-    font-size: 2.4rem;
-}
-
-.tagline {
-    margin-top: 0;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    color: #ffffff;
-}
-
-
-
-.container {
+main {
     width: 90%;
     max-width: 900px;
     margin: 2rem auto;
 }
 
+/* Class selector: reusable styling for content cards. */
 .card {
+    background-color: var(--white-color);
     margin-bottom: 1.5rem;
     padding: 1.5rem;
-    background-color: #ffffff;
-    border: 1px solid #dce3eb;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(23, 54, 93, 0.08);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
 }
 
-/* Class selector */
-
-.intro {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #245b85;
+/* Grouping selector: gives section headings a shared style. */
+h2,
+h3 {
+    color: var(--primary-color);
+    line-height: 1.3;
 }
 
+h2 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Descendant selector: selects paragraphs inside cards. */
 .card p {
-    color: #425466;
+    color: #37474f;
 }
 
-
+/* Child combinator: selects paragraphs directly inside a card. */
 .card > p {
-    line-height: 1.8;
+    max-width: 75ch;
+}
+
+/*
+   ADJACENT SIBLING COMBINATOR (+):
+   Selects the first paragraph immediately following an h2.
+*/
+.card h2 + p {
+    margin-top: 0.75rem;
+}
+
+/*
+   GENERAL SIBLING COMBINATOR (~):
+   Selects the form that appears after an h2 in the same card.
+*/
+.card h2 ~ form {
+    margin-top: 1rem;
 }
 
 
-h2 + p {
-    text-indent: 1em;
+/* ==================================================
+   6. PROFILE IMAGE
+   ================================================== */
+
+.profile-image {
+    display: block;
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 4px solid var(--secondary-color);
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 1rem auto;
 }
 
-h2 ~ p {
-    letter-spacing: 0.1px;
+
+/* ==================================================
+   7. SKILLS LIST
+   ================================================== */
+
+.skills-list {
+    list-style-type: square;
+    padding-left: 1.5rem;
+}
+
+.skills-list li {
+    background-color: #edf4fa;
+    margin: 0.5rem 0;
+    padding: 0.65rem 0.8rem;
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 4px;
+}
+
+/* Attribute selector: targets list items with a class attribute. */
+li[class] {
+    overflow-wrap: anywhere;
 }
 
 
+/* ==================================================
+   8. NOTICE AND SPECIFICITY DEMONSTRATION
+   ================================================== */
+
+/*
+   Both .card p and p.notice have specificity (0,1,1):
+   one class selector and one element selector each.
+
+   Because p.notice appears later in the stylesheet, its color wins
+   when both rules match the same paragraph.
+
+   A directly declared color also overrides the color inherited from body.
+*/
 p.notice {
     color: #7a3e00;
     background-color: #fff2d8;
     padding: 0.8rem;
-    border-left: 4px solid #e89b30;
+    border-left: 4px solid var(--accent-color);
     border-radius: 4px;
-}
-
-
-
-.skills-list {
-    list-style-type: square;
-    list-style-position: inside;
-    padding-left: 0;
-}
-
-.skills-list li {
-    margin-bottom: 0.6rem;
-    padding: 0.6rem;
-    background-color: #e8f3fa;
-    border-radius: 6px;
-}
-
-
-
-input[type="text"] {
-    background-color: #fbfdff;
-}
-
-/* Attribute selector: required form controls */
-
-input[required],
-textarea[required],
-select[required] {
-    border-left: 3px solid #287da8;
-}
-
-/* ========================================
-   7. Contact form
-   ======================================== */
-
-.contact-form {
-    width: 100%;
-    max-width: 600px;
-}
-
-.form-group {
-    margin-bottom: 1.2rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 700;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 0.75rem;
-    font: inherit;
-    color: #263238;
-    border: 1px solid #b9c5d2;
-    border-radius: 6px;
-    background-color: #ffffff;
-}
-
-/* Outline and outline-offset */
-
-input:focus,
-select:focus,
-textarea:focus {
-    outline: 3px solid rgba(40, 125, 168, 0.25);
-    outline-offset: 2px;
-    border-color: #287da8;
-}
-
-textarea {
-    resize: vertical;
-}
-
-/* Button styling */
-
-button {
-    padding: 0.8rem 1.4rem;
-    font: inherit;
-    font-weight: 700;
-    color: #ffffff;
-    background: linear-gradient(90deg, #17365d, #287da8);
-    border: none;
-    border-radius: 7px;
-    box-shadow: 0 3px 8px rgba(23, 54, 93, 0.2);
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.85;
-}
-
-/* ========================================
-   8. Footer and text effects
-   ======================================== */
-
-.footer {
-    padding: 1.5rem;
-    text-align: center;
-    background-color: #dfe8f0;
-}
-
-.footer p {
-    margin: 0.4rem;
-}
-
-/* General sibling selector example */
-.footer p ~ a {
-    display: inline-block;
-    margin-top: 0.4rem;
-}
-
-/* Example of white-space and text overflow */
-.notice {
     white-space: normal;
     overflow-wrap: anywhere;
 }
 
-/* Example of text shadow */
-.tagline {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+/* ==================================================
+   9. FORM ELEMENTS
+   ================================================== */
+
+form {
+    width: 100%;
+}
+
+/* Class selector for each form field group. */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* Grouping selector for labels and form controls. */
+label,
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.35rem;
+}
+
+/* Attribute selectors target specific input types. */
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 0.7rem;
+    color: var(--text-color);
+    background-color: var(--white-color);
+    border: 1px solid #aab7c4;
+    border-radius: 5px;
+}
+
+/* Focus state helps users identify the active field. */
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+    border-color: var(--secondary-color);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Button styling and hover effect. */
+button {
+    cursor: pointer;
+    padding: 0.7rem 1.2rem;
+    margin: 0.3rem 0.4rem 0.3rem 0;
+    color: var(--white-color);
+    background-color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+button:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+/* Class selector gives the reset button a different appearance. */
+.reset-button {
+    background-color: #626d78;
+    border-color: #626d78;
+}
+
+.reset-button:hover {
+    background-color: #424b53;
+    border-color: #424b53;
 }
 
 
+/* ==================================================
+   10. FOOTER
+   ================================================== */
 
-.color-examples {
-    color: rgb(30, 80, 120);
-    background-color: rgba(255, 255, 255, 0.8);
-    border-color: hsl(200, 50%, 40%);
+footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    font-size: 0.9rem;
 }
 
-/* Example radial gradient */
-.gradient-example {
-    background-image: radial-gradient(
-        circle,
-        #ffffff,
-        #d7eaf7,
-        #8bbbd5
-    );
+footer p {
+    margin: 0.4rem 0;
 }
 
-/* Example of font shorthand */
-.font-example {
-    font: italic 600 1rem/1.7 Arial, sans-serif;
+footer a,
+footer a:link,
+footer a:visited {
+    color: var(--white-color);
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: #ffdc9a;
 }
 
 
+/* ==================================================
+   11. RESPONSIVE DESIGN
+   ================================================== */
 
+/* Media query adjusts the layout on smaller screens. */
 @media (max-width: 600px) {
     #profile-header {
-        min-height: 45vh;
-        padding: 1.5rem 4%;
+        padding: 2rem 1rem;
     }
 
-    #profile-header > h1 {
-        font-size: 1.8rem;
+    #profile-header h1 {
+        font-size: 1.7rem;
     }
 
-    .container {
+    #profile-header p {
+        font-size: 1rem;
+    }
+
+    main {
         width: 94%;
+        margin: 1rem auto;
     }
 
     .card {
         padding: 1rem;
     }
 
-    .navigation a {
-        margin: 0.2rem;
+    .navigation > ul {
+        gap: 0.5rem;
+    }
+
+    button {
+        width: 100%;
+        margin-right: 0;
     }
 }

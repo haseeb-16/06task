@@ -1,82 +1,81 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="My computer science profile and skills">
-    <title>My Profile | CSS Basics</title>
+    <meta name="description" content="My personal profile page showcasing my skills, interests, and contact information.">
 
-    <!-- Connect the external stylesheet -->
+    <title>My Profile Page</title>
+
+    <!-- External CSS stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header id="profile-header" class="profile-header">
-        <nav class="navigation">
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-        <img
-            src="me.jpeg"
-            alt="My profile photograph"
-            class="profile-image"
-        >
-
+    <!-- Profile header -->
+    <header id="profile-header">
         <h1>Haseeb Ur Rehman</h1>
-        <p class="tagline">Computer Science Graduate | AI Enthusiast</p>
+        <p>Computer Science Graduate | AI and Machine Learning Enthusiast</p>
     </header>
 
-    <main class="container">
+    <!-- Navigation menu -->
+    <nav class="navigation" aria-label="Main navigation">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
+    <!-- Main page content -->
+    <main>
+        <!-- About section -->
         <section id="about" class="card">
             <h2>About Me</h2>
 
-            <p class="intro">
-                I am a Computer Science graduate from Information Technology
-                University (ITU), Lahore.
-            </p>
+            <img
+                src="me.jpeg"
+                alt="Profile photo"
+                class="profile-image"
+                width="200"
+                height="200"
+            >
 
             <p>
-                I am interested in Artificial Intelligence, Machine Learning,
-                and Computer Vision. I enjoy learning new technologies and
-                building practical projects.
+                I am a Computer Science graduate from Information Technology
+                University (ITU), Lahore. I am interested in Artificial
+                Intelligence, Machine Learning, and Computer Vision.
             </p>
 
             <p class="notice">
-                My goal is to continue learning and improve my technical skills.
+                My goal is to keep learning, improve my technical skills,
+                and work on practical software and AI projects.
             </p>
         </section>
 
+        <!-- Skills section -->
         <section id="skills" class="card">
             <h2>My Skills</h2>
 
             <ul class="skills-list">
-                <li>Python</li>
+                <li>Python Programming</li>
                 <li>HTML and CSS</li>
-                <li>Computer Vision</li>
-                <li>Machine Learning</li>
-                <li>SQL and Git</li>
+                <li>C++ Programming</li>
+                <li>SQL and Databases</li>
+                <li>Computer Vision and YOLO</li>
+                <li>Git and GitHub</li>
             </ul>
-
-            <h3>Learning Goals</h3>
-            <ol>
-                <li>Improve web development skills</li>
-                <li>Build AI projects</li>
-                <li>Learn software development practices</li>
-            </ol>
         </section>
 
+        <!-- Contact section -->
         <section id="contact" class="card">
             <h2>Contact Me</h2>
 
-            <p>Use the form below to send a sample message.</p>
+            <p>You can use the form below to send me a message.</p>
 
-            <form action="#" method="post" class="contact-form">
+            <form action="#" method="post">
                 <div class="form-group">
-                    <label for="name">Full Name</label>
+                    <label for="name">Full Name:</label>
                     <input
                         type="text"
                         id="name"
@@ -87,7 +86,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">Email Address:</label>
                     <input
                         type="email"
                         id="email"
@@ -98,35 +97,38 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="topic">Message Topic</label>
-                    <select id="topic" name="topic" required>
-                        <option value="">Choose a topic</option>
-                        <option value="internship">Internship</option>
-                        <option value="project">Project</option>
-                        <option value="other">Other</option>
+                    <label for="subject">Subject:</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="project">Project Discussion</option>
+                        <option value="career">Career Opportunity</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Your Message</label>
+                    <label for="message">Message:</label>
                     <textarea
                         id="message"
                         name="message"
                         rows="5"
-                        placeholder="Write your message"
+                        placeholder="Write your message here"
                         required
                     ></textarea>
                 </div>
 
                 <button type="submit">Send Message</button>
+                <button type="reset" class="reset-button">Reset Form</button>
             </form>
         </section>
-
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2026 My Profile Page</p>
-        <a href="#profile-header">Back to top</a>
+    <!-- Page footer -->
+    <footer>
+        <p>&copy; 2026 Haseeb Ur Rehman. All rights reserved.</p>
+        <p>
+            <a href="#profile-header">Back to Top</a>
+        </p>
     </footer>
 
 </body>
