@@ -1,9 +1,3 @@
-
-/* ==================================================
-   1. CSS CUSTOM PROPERTIES
-   Variables make colors and common values reusable.
-   ================================================== */
-
 :root {
     --primary-color: #17365d;
     --secondary-color: #287da8;
@@ -16,22 +10,11 @@
 }
 
 
-/* ==================================================
-   2. UNIVERSAL SELECTOR AND BODY DEFAULTS
-   ================================================== */
-
-/* Universal selector: applies border-box sizing to all elements. */
 * {
     box-sizing: border-box;
 }
 
-/*
-   Element selector: styles the whole page.
 
-   INHERITANCE:
-   Child elements inherit properties such as color and font-family
-   from body unless their own CSS rules specify different values.
-*/
 body {
     margin: 0;
     padding: 0;
@@ -43,13 +26,12 @@ body {
 }
 
 
-/* ==================================================
-   3. PROFILE HEADER
-   ================================================== */
-
-/* ID selector: targets the element with id="profile-header". */
 #profile-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--secondary-color)
+    );
     color: var(--white-color);
     text-align: center;
     padding: 3rem 1rem;
@@ -66,20 +48,17 @@ body {
 
 #profile-header p {
     margin: 0.5rem 0 0;
-    font-size: 1.1rem;
+
+    /* em is relative to the element's inherited font size. */
+    font-size: 1.1em;
 }
-
-
-/* ==================================================
-   4. NAVIGATION AND LINK STATES
-   ================================================== */
 
 .navigation {
     background-color: var(--primary-color);
     padding: 0.75rem 1rem;
 }
 
-/* Child combinator: selects only the ul directly inside nav. */
+/* Child combinator: selects the ul directly inside navigation. */
 .navigation > ul {
     list-style: none;
     display: flex;
@@ -90,7 +69,7 @@ body {
     padding: 0;
 }
 
-/* Descendant combinator: selects links anywhere inside navigation. */
+/* Descendant combinator: selects links inside navigation. */
 .navigation a {
     display: inline-block;
     color: var(--white-color);
@@ -109,14 +88,6 @@ a:visited {
     color: #7040a0;
 }
 
-/*
-   SPECIFICITY:
-   a:link has specificity (0,1,1).
-   .navigation a:link has specificity (0,2,1).
-
-   The navigation selector is more specific, so its white link color
-   overrides the general a:link color inside the navigation.
-*/
 .navigation a:link {
     color: var(--white-color);
 }
@@ -125,7 +96,7 @@ a:visited {
     color: #e5ddff;
 }
 
-/* Hover and keyboard-focus states improve usability. */
+/* Hover and keyboard-focus states. */
 .navigation a:hover,
 .navigation a:focus-visible {
     background-color: var(--secondary-color);
@@ -143,10 +114,6 @@ a:active {
 }
 
 
-/* ==================================================
-   5. MAIN CONTENT AND SECTIONS
-   ================================================== */
-
 main {
     width: 90%;
     max-width: 900px;
@@ -163,7 +130,7 @@ main {
     box-shadow: var(--card-shadow);
 }
 
-/* Grouping selector: gives section headings a shared style. */
+/* Grouping selector: applies shared styles to both heading levels. */
 h2,
 h3 {
     color: var(--primary-color);
@@ -181,31 +148,21 @@ h2 {
     color: #37474f;
 }
 
-/* Child combinator: selects paragraphs directly inside a card. */
+/* Child combinator: selects direct paragraphs inside a card. */
 .card > p {
     max-width: 75ch;
 }
 
-/*
-   ADJACENT SIBLING COMBINATOR (+):
-   Selects the first paragraph immediately following an h2.
-*/
+/* Adjacent sibling combinator: paragraph immediately after h2. */
 .card h2 + p {
     margin-top: 0.75rem;
 }
 
-/*
-   GENERAL SIBLING COMBINATOR (~):
-   Selects the form that appears after an h2 in the same card.
-*/
+/* General sibling combinator: form following h2 in the same card. */
 .card h2 ~ form {
     margin-top: 1rem;
 }
 
-
-/* ==================================================
-   6. PROFILE IMAGE
-   ================================================== */
 
 .profile-image {
     display: block;
@@ -221,10 +178,6 @@ h2 {
 }
 
 
-/* ==================================================
-   7. SKILLS LIST
-   ================================================== */
-
 .skills-list {
     list-style-type: square;
     padding-left: 1.5rem;
@@ -238,25 +191,7 @@ h2 {
     border-radius: 4px;
 }
 
-/* Attribute selector: targets list items with a class attribute. */
-li[class] {
-    overflow-wrap: anywhere;
-}
 
-
-/* ==================================================
-   8. NOTICE AND SPECIFICITY DEMONSTRATION
-   ================================================== */
-
-/*
-   Both .card p and p.notice have specificity (0,1,1):
-   one class selector and one element selector each.
-
-   Because p.notice appears later in the stylesheet, its color wins
-   when both rules match the same paragraph.
-
-   A directly declared color also overrides the color inherited from body.
-*/
 p.notice {
     color: #7a3e00;
     background-color: #fff2d8;
@@ -267,28 +202,12 @@ p.notice {
     overflow-wrap: anywhere;
 }
 
-
-/* ==================================================
-   9. FORM ELEMENTS
-   ================================================== */
-
 form {
     width: 100%;
 }
 
-/* Class selector for each form field group. */
 .form-group {
     margin-bottom: 1rem;
-}
-
-/* Grouping selector for labels and form controls. */
-label,
-input,
-select,
-textarea,
-button {
-    font-family: inherit;
-    font-size: 1rem;
 }
 
 label {
@@ -297,11 +216,8 @@ label {
     margin-bottom: 0.35rem;
 }
 
-/* Attribute selectors target specific input types. */
-input[type="text"],
-input[type="email"],
-select,
-textarea {
+/* Shared class avoids repeating selectors for each input type. */
+.form-control {
     display: block;
     width: 100%;
     padding: 0.7rem;
@@ -309,25 +225,30 @@ textarea {
     background-color: var(--white-color);
     border: 1px solid #aab7c4;
     border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
-/* Focus state helps users identify the active field. */
-input[type="text"]:focus,
-input[type="email"]:focus,
-select:focus,
-textarea:focus {
+/* Meaningful attribute selector: identifies required form controls. */
+input[required],
+select[required],
+textarea[required] {
+    border-left: 3px solid var(--secondary-color);
+}
+
+/* Focus state applies to every control with the shared class. */
+.form-control:focus {
     outline: 2px solid var(--secondary-color);
     outline-offset: 2px;
     border-color: var(--secondary-color);
 }
 
-textarea {
+textarea.form-control {
     resize: vertical;
     min-height: 120px;
 }
 
-/* Button styling and hover effect. */
-button {
+.form-actions button {
     cursor: pointer;
     padding: 0.7rem 1.2rem;
     margin: 0.3rem 0.4rem 0.3rem 0;
@@ -335,35 +256,41 @@ button {
     background-color: var(--secondary-color);
     border: 2px solid var(--secondary-color);
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: inherit;
+    font-size: 1rem;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
 }
 
-button:hover {
+.form-actions button:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
     transform: translateY(-2px);
 }
 
-button:focus-visible {
+.form-actions button:focus-visible {
     outline: 3px solid var(--accent-color);
     outline-offset: 3px;
 }
 
-/* Class selector gives the reset button a different appearance. */
-.reset-button {
+/* Modifier class: changes only the reset button's appearance. */
+.form-actions .reset-button {
     background-color: #626d78;
     border-color: #626d78;
 }
 
-.reset-button:hover {
+.form-actions .reset-button:hover {
     background-color: #424b53;
     border-color: #424b53;
 }
 
 
-/* ==================================================
-   10. FOOTER
-   ================================================== */
+/*
+==================================================
+11. FOOTER
+==================================================
+*/
 
 footer {
     text-align: center;
@@ -389,11 +316,12 @@ footer a:focus-visible {
 }
 
 
-/* ==================================================
-   11. RESPONSIVE DESIGN
-   ================================================== */
+/*
+==================================================
+12. RESPONSIVE DESIGN
+==================================================
+*/
 
-/* Media query adjusts the layout on smaller screens. */
 @media (max-width: 600px) {
     #profile-header {
         padding: 2rem 1rem;
@@ -404,7 +332,7 @@ footer a:focus-visible {
     }
 
     #profile-header p {
-        font-size: 1rem;
+        font-size: 1em;
     }
 
     main {
@@ -420,8 +348,25 @@ footer a:focus-visible {
         gap: 0.5rem;
     }
 
-    button {
+    .form-actions button {
+        display: block;
         width: 100%;
-        margin-right: 0;
+        margin: 0.5rem 0;
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .form-actions button:hover {
+        transform: none;
     }
 }

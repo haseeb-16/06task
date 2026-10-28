@@ -18,7 +18,7 @@
         <p>Computer Science Graduate | AI and Machine Learning Enthusiast</p>
     </header>
 
-    <!-- Navigation menu -->
+    <!-- Main navigation -->
     <nav class="navigation" aria-label="Main navigation">
         <ul>
             <li><a href="#about">About</a></li>
@@ -80,7 +80,9 @@
                         type="text"
                         id="name"
                         name="name"
+                        class="form-control"
                         placeholder="Enter your name"
+                        autocomplete="name"
                         required
                     >
                 </div>
@@ -91,14 +93,21 @@
                         type="email"
                         id="email"
                         name="email"
+                        class="form-control"
                         placeholder="Enter your email"
+                        autocomplete="email"
                         required
                     >
                 </div>
 
                 <div class="form-group">
                     <label for="subject">Subject:</label>
-                    <select id="subject" name="subject" required>
+                    <select
+                        id="subject"
+                        name="subject"
+                        class="form-control"
+                        required
+                    >
                         <option value="">Select a subject</option>
                         <option value="general">General Inquiry</option>
                         <option value="project">Project Discussion</option>
@@ -111,14 +120,19 @@
                     <textarea
                         id="message"
                         name="message"
+                        class="form-control"
                         rows="5"
                         placeholder="Write your message here"
                         required
                     ></textarea>
                 </div>
 
-                <button type="submit">Send Message</button>
-                <button type="reset" class="reset-button">Reset Form</button>
+                <div class="form-actions">
+                    <button type="submit">Send Message</button>
+                    <button type="reset" class="reset-button">
+                        Reset Form
+                    </button>
+                </div>
             </form>
         </section>
     </main>
